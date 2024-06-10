@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/recipesFragment">
+
+    <fragment
+        android:id="@+id/recipesFragment"
+        android:name="com.cpw253.ddvrecipes.RecipesFragment"
+        android:label="Recipes"
+        tools:layout="@layout/fragment_recipes">
+        <action
+            android:id="@+id/action_recipesFragment_to_ingredientsFragment"
+            app:destination="@id/ingredientsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ingredientsFragment"
+        android:name="com.cpw253.ddvrecipes.IngredientsFragment"
+        android:label="Ingredients"
+        tools:layout="@layout/fragment_ingredients">
+        <argument
+            android:name="recipe"
+            app:argType="com.cpw253.ddvrecipes.Recipe"
+            app:nullable="false" />
+    </fragment>
+
+</navigation>
