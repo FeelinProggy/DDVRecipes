@@ -28,13 +28,11 @@ class RecipesAdapter(private val onRecipeSelected: (Recipe) -> Unit) :
 
     inner class RecipeViewHolder(private val binding: RecipesItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(recipe: Recipe) {
             binding.recipe = recipe
             binding.root.setOnClickListener {
                 onRecipeSelected(recipe)
             }
-            binding.ingredientsList.text = recipe.ingredients.joinToString(separator = "\n") { it.name }
         }
     }
 }

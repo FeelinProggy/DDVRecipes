@@ -14,6 +14,6 @@
     <string name="_3">3</string>
     <string name="_2">2</string>
     <string name="_1">1</string>
-    <string name="by_stars">By Stars:</string>
-    <string name="get_ingrerdients">Get Ingrerdients</string>
+    <string name="by_stars">By Stars >=</string>
+    <string name="fetch_ingredients">Fetch ingredients</string>
 </resources>
