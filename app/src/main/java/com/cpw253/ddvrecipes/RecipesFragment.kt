@@ -30,6 +30,7 @@ class RecipesFragment : Fragment() {
         val view = binding.root
 
         recipesAdapter = RecipesAdapter { selectedRecipe ->
+            recipesViewModel.selectRecipe(selectedRecipe)
             val action = RecipesFragmentDirections.actionRecipesFragmentToIngredientsFragment(selectedRecipe)
             findNavController().navigate(action)
         }
@@ -43,12 +44,12 @@ class RecipesFragment : Fragment() {
 
         binding.stars.setOnCheckedChangeListener { _, checkedId ->
             val starLevel = when (checkedId) {
-                R.id.oneStar -> "1"
-                R.id.twoStar -> "2"
-                R.id.threeStar -> "3"
-                R.id.fourStar -> "4"
-                R.id.fiveStar -> "5"
-                else -> ""
+                R.id.oneStar -> 1
+                R.id.twoStar -> 2
+                R.id.threeStar -> 3
+                R.id.fourStar -> 4
+                R.id.fiveStar -> 5
+                else -> 1
             }
             recipesViewModel.setStarLevelFilter(starLevel)
         }

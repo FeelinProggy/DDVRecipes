@@ -23,8 +23,8 @@ class IngredientsFragment : Fragment() {
         _binding = FragmentIngredientsBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        val navArgs = arguments?.let { IngredientsFragmentArgs.fromBundle(it) }
-        navArgs?.recipe?.let { recipe ->
+        val recipeArgs = arguments?.let { IngredientsFragmentArgs.fromBundle(it) }
+        recipeArgs?.recipe?.let { recipe ->
             ingredientsViewModel.setRecipe(recipe)
         }
 

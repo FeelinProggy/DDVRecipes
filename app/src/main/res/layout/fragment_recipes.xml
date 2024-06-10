@@ -89,7 +89,8 @@
                         android:id="@+id/oneStar"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="@string/_1" />
+                        android:text="@string/_1"
+                        android:checked="true" />
 
                     <RadioButton
                         android:id="@+id/twoStar"
@@ -193,6 +194,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
+            android:contentDescription="@string/fetch_ingredients"
             android:src="@android:drawable/ic_menu_send"
             android:layout_margin="16dp" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -3,7 +3,7 @@ package com.cpw253.ddvrecipes
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.cpw253.ddvrecipes.databinding.ItemRecipeBinding
+import com.cpw253.ddvrecipes.databinding.RecipesItemBinding
 
 class RecipesAdapter(private val onRecipeSelected: (Recipe) -> Unit) :
     RecyclerView.Adapter<RecipesAdapter.RecipeViewHolder>() {
@@ -16,7 +16,7 @@ class RecipesAdapter(private val onRecipeSelected: (Recipe) -> Unit) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
-        val binding = ItemRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = RecipesItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RecipeViewHolder(binding)
     }
 
@@ -26,7 +26,7 @@ class RecipesAdapter(private val onRecipeSelected: (Recipe) -> Unit) :
 
     override fun getItemCount() = recipes.size
 
-    inner class RecipeViewHolder(private val binding: ItemRecipeBinding) :
+    inner class RecipeViewHolder(private val binding: RecipesItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(recipe: Recipe) {
