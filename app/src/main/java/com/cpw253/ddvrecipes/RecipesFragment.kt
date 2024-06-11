@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -28,6 +29,7 @@ class RecipesFragment : Fragment() {
     ): View {
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
         val view = binding.root
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
         recipesAdapter = RecipesAdapter { selectedRecipe ->
             val action = RecipesFragmentDirections.actionRecipesFragmentToIngredientsFragment(selectedRecipe)
@@ -43,12 +45,12 @@ class RecipesFragment : Fragment() {
 
         binding.stars.setOnCheckedChangeListener { _, checkedId ->
             val starLevel = when (checkedId) {
-                R.id.oneStar -> "1"
-                R.id.twoStar -> "2"
-                R.id.threeStar -> "3"
-                R.id.fourStar -> "4"
-                R.id.fiveStar -> "5"
-                else -> ""
+                R.id.oneStar -> 1
+                R.id.twoStar -> 2
+                R.id.threeStar -> 3
+                R.id.fourStar -> 4
+                R.id.fiveStar -> 5
+                else -> 1
             }
             recipesViewModel.setStarLevelFilter(starLevel)
         }

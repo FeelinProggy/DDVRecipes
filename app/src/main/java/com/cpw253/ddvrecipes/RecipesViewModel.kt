@@ -14,14 +14,14 @@ class RecipesViewModel(private val recipesRepository: RecipesRepository) : ViewM
 
     private val allRecipes: List<Recipe> = recipesRepository.getAllRecipes()
 
-    private var currentStarLevel = ""
+    private var currentStarLevel = 1
     private var currentMealType = "All"
 
     init {
         _filteredRecipes.value = allRecipes
     }
 
-    fun setStarLevelFilter(starLevel: String) {
+    fun setStarLevelFilter(starLevel: Int) {
         currentStarLevel = starLevel
         applyFilters()
     }
@@ -33,7 +33,7 @@ class RecipesViewModel(private val recipesRepository: RecipesRepository) : ViewM
 
     private fun applyFilters() {
         val filteredList = allRecipes.filter { recipe ->
-            (currentStarLevel.isEmpty() || recipe.starLevel.toString() == currentStarLevel) &&
+            (recipe.starLevel >= currentStarLevel) &&
                     (currentMealType.equals("All", ignoreCase = true) || recipe.meal.name.equals(currentMealType, ignoreCase = true))
         }
         _filteredRecipes.value = filteredList
