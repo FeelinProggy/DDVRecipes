@@ -58,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/search_for_a_recipe"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     app:layout_anchorGravity="top|center"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -67,10 +67,10 @@
 
                 <RadioGroup
                     android:id="@+id/stars"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="330dp"
+                    android:layout_height="51dp"
                     android:orientation="horizontal"
-                    app:layout_constraintBottom_toTopOf="@+id/search_by"
+                    app:layout_constraintBottom_toTopOf="@+id/recipeRecycler"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -83,14 +83,15 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="@string/by_stars"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
 
                     <RadioButton
                         android:id="@+id/oneStar"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="@string/_1"
-                        android:checked="true"  />
+                        android:checked="true"
+                        android:text="@string/_1" />
 
                     <RadioButton
                         android:id="@+id/twoStar"
@@ -126,7 +127,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/searchHeader"
-                    app:layout_constraintVertical_bias="0.5">
+                    app:layout_constraintVertical_bias="0.51">
 
                     <TextView
                         android:id="@+id/MealType"
@@ -135,14 +136,15 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="@string/meal_type"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
 
                     <RadioButton
                         android:id="@+id/radio_allMeals"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="@string/any"
-                        android:checked="true" />
+                        android:checked="true"
+                        android:text="@string/any" />
 
                     <RadioButton
                         android:id="@+id/radio_appetizer"
@@ -163,29 +165,38 @@
                         android:text="@string/dessert" />
                 </RadioGroup>
 
-                <EditText
-                    android:id="@+id/search_by"
-                    android:layout_width="211dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="88dp"
-                    android:hint="@string/search_by_name"
-                    android:inputType="text"
+                <TextView
+                    android:id="@+id/recyclerHeader"
+                    android:layout_width="131dp"
+                    android:layout_height="29dp"
+                    android:layout_marginTop="34dp"
+                    android:layout_marginBottom="31dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/browse_recipes"
+                    android:textAlignment="center"
                     android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recipeRecycler"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.131"
+                    app:layout_constraintHorizontal_bias="0.12"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/meal_type"
-                    tools:ignore="MissingConstraints" />
+                    app:layout_constraintTop_toBottomOf="@+id/stars"
+                    app:layout_constraintVertical_bias="1.0" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recipeRecycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="284dp"
+                    android:layout_height="367dp"
+                    android:layout_marginTop="84dp"
                     android:layout_weight="1"
                     android:gravity="top"
+                    android:textSize="40sp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintTop_toBottomOf="@+id/search_by" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.494"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/stars" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

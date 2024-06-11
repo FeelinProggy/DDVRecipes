@@ -5,8 +5,7 @@
     <string name="appetizer">Appetizer</string>
     <string name="entree">Entree</string>
     <string name="dessert">Dessert</string>
-    <string name="search_by_name">Search by name</string>
-    <string name="search_again">Search Again</string>
+    <string name="search_by_name">Search by name (WORK IN PROGRESS)</string>
     <string name="meal_type">Meal Type:</string>
     <string name="_5">5</string>
     <string name="_4">4</string>
@@ -14,4 +13,5 @@
     <string name="_2">2</string>
     <string name="_1">1</string>
     <string name="by_stars">By Stars >= </string>
+    <string name="browse_recipes">"Browse recipes: "</string>
 </resources>

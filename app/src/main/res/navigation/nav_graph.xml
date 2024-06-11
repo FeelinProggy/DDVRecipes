@@ -9,20 +9,6 @@
         android:name="com.cpw253.ddvrecipes.RecipesFragment"
         android:label="Recipes"
         tools:layout="@layout/fragment_recipes">
-        <action
-            android:id="@+id/action_recipesFragment_to_ingredientsFragment"
-            app:destination="@id/ingredientsFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/ingredientsFragment"
-        android:name="com.cpw253.ddvrecipes.IngredientsFragment"
-        android:label="Ingredients"
-        tools:layout="@layout/fragment_ingredients">
-        <argument
-            android:name="recipe"
-            app:argType="com.cpw253.ddvrecipes.Recipe"
-            app:nullable="false" />
     </fragment>
 
 </navigation>
