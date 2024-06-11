@@ -2,18 +2,12 @@ package com.cpw253.ddvrecipes
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cpw253.ddvrecipes.databinding.RecipesItemBinding
 
-class RecipesAdapter(private val onRecipeSelected: (Recipe) -> Unit) :
-    RecyclerView.Adapter<RecipesAdapter.RecipeViewHolder>() {
-
-    private var recipes = listOf<Recipe>()
-
-    fun submitList(newRecipes: List<Recipe>) {
-        recipes = newRecipes
-        notifyDataSetChanged()
-    }
+class RecipesAdapter(private val clickListener: (Recipe) -> Unit) : ListAdapter<Recipe, RecipesAdapter.RecipeViewHolder>(RecipeDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val binding = RecipesItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -21,20 +15,27 @@ class RecipesAdapter(private val onRecipeSelected: (Recipe) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
-        holder.bind(recipes[position])
+        val recipe = getItem(position)
+        holder.bind(recipe, clickListener)
     }
 
-    override fun getItemCount() = recipes.size
-
-    inner class RecipeViewHolder(private val binding: RecipesItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(recipe: Recipe) {
+    inner class RecipeViewHolder(private val binding: RecipesItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(recipe: Recipe, clickListener: (Recipe) -> Unit) {
             binding.recipe = recipe
             binding.root.setOnClickListener {
-                onRecipeSelected(recipe)
+                clickListener(recipe)
             }
-            binding.ingredientsList.text = recipe.ingredients.joinToString(separator = "\n") { it.name }
+            binding.executePendingBindings()
+        }
+    }
+
+    class RecipeDiffCallback : DiffUtil.ItemCallback<Recipe>() {
+        override fun areItemsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
+            return oldItem.name == newItem.name // Assuming name is unique
+        }
+
+        override fun areContentsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
+            return oldItem == newItem
         }
     }
 }

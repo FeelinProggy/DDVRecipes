@@ -70,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintBottom_toTopOf="@+id/by_name"
+                    app:layout_constraintBottom_toTopOf="@+id/search_by"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -164,7 +164,7 @@
                 </RadioGroup>
 
                 <EditText
-                    android:id="@+id/by_name"
+                    android:id="@+id/search_by"
                     android:layout_width="211dp"
                     android:layout_height="48dp"
                     android:layout_marginStart="16dp"
@@ -181,21 +181,13 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recipeRecycler"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="top"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintTop_toBottomOf="@+id/by_name" />
+                    app:layout_constraintTop_toBottomOf="@+id/search_by" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/cook_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:src="@android:drawable/ic_menu_send"
-            android:layout_margin="16dp" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

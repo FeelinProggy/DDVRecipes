@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.databinding.DataBindingUtil
 import com.cpw253.ddvrecipes.databinding.FragmentRecipesBinding
+import com.cpw253.ddvrecipes.databinding.DialogRecipeIngredientsBinding
 
 class RecipesFragment : Fragment() {
 
@@ -22,27 +23,32 @@ class RecipesFragment : Fragment() {
     }
 
     private lateinit var recipesAdapter: RecipesAdapter
+    private var selectedRecipe: Recipe? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentRecipesBinding.inflate(inflater, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipes, container, false)
         val view = binding.root
+
+        // Set up the toolbar
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
-        recipesAdapter = RecipesAdapter { selectedRecipe ->
-            val action = RecipesFragmentDirections.actionRecipesFragmentToIngredientsFragment(selectedRecipe)
-            findNavController().navigate(action)
+        // Set up the RecyclerView
+        recipesAdapter = RecipesAdapter { recipe ->
+            selectedRecipe = recipe
+            showRecipeDialog()
         }
-
         binding.recipeRecycler.layoutManager = LinearLayoutManager(context)
         binding.recipeRecycler.adapter = recipesAdapter
 
-        recipesViewModel.filteredRecipes.observe(viewLifecycleOwner, Observer { filteredList ->
+        // Observe the filtered recipes
+        recipesViewModel.filteredRecipes.observe(viewLifecycleOwner) { filteredList ->
             recipesAdapter.submitList(filteredList)
-        })
+        }
 
+        // Set up the star rating filter
         binding.stars.setOnCheckedChangeListener { _, checkedId ->
             val starLevel = when (checkedId) {
                 R.id.oneStar -> 1
@@ -55,6 +61,7 @@ class RecipesFragment : Fragment() {
             recipesViewModel.setStarLevelFilter(starLevel)
         }
 
+        // Set up the meal type filter
         binding.mealType.setOnCheckedChangeListener { _, checkedId ->
             val mealType = when (checkedId) {
                 R.id.radio_appetizer -> "APPETIZER"
@@ -66,6 +73,30 @@ class RecipesFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun showRecipeDialog() {
+        selectedRecipe?.let { recipe ->
+            val dialogBinding: DialogRecipeIngredientsBinding = DataBindingUtil.inflate(
+                LayoutInflater.from(context), R.layout.dialog_recipe_ingredients, null, false
+            )
+            dialogBinding.recipe = recipe
+
+            val dialog = AlertDialog.Builder(requireContext())
+                .setView(dialogBinding.root)
+                .setPositiveButton("OK", null)
+                .create()
+
+            dialog.setOnShowListener {
+                val window = dialog.window
+                window?.setLayout(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,  // Set width as needed
+                    ViewGroup.LayoutParams.WRAP_CONTENT  // Wrap the content height
+                )
+            }
+
+            dialog.show()
+        }
     }
 
     override fun onDestroyView() {
